@@ -1,7 +1,7 @@
 # Student Management API
 
 A backend project built using **FastAPI** to learn backend development through practical implementation.
----
+
 
 # Tech Stack
 
@@ -110,7 +110,7 @@ python -m uvicorn main:app --reload
 
 ---
 
-# 📖 API Documentation
+#  API Documentation
 
 After running the server, open: http://127.0.0.1:8000/
 

@@ -59,9 +59,9 @@ def get_students():
     return students
 
 
-# -------------------------
+
 # Get Student By ID
-# -------------------------
+
 
 @app.get("/students/{student_id}", status_code=status.HTTP_200_OK)
 def get_student(student_id: int):
@@ -98,9 +98,8 @@ def add_student(student: Student):
     }
 
 
-# -------------------------
 # Update Student
-# -------------------------
+
 
 @app.put("/students/{student_id}")
 def update_student(student_id: int, updated_student: Student):
