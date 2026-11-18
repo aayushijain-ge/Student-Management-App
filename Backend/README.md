@@ -16,13 +16,13 @@ A backend project built using **FastAPI** to learn backend development through p
 #  Project Structure (Day 1)
 
 ```text
-Student-Management-App/
-│
-├── venv/
-├── main.py
-├── requirements.txt
-├── README.md
-└── .gitignore
+Student-Management-App/Backend/
+                        │
+                        ├── venv/
+                        ├── main.py
+                        ├── requirements.txt
+                        ├── README.md
+                        └── .gitignore
 ```
 
 ---
@@ -43,16 +43,6 @@ Student-Management-App/
 
 ---
 
-## Features Implemented
-
-- Welcome API
-- Get All Students
-- Get Student by ID
-- Add New Student
-- Update Student
-- Delete Student
-
----
 
 # API Endpoints
 
@@ -67,18 +57,18 @@ Student-Management-App/
 
 ---
 
-# How to Run the Project
+# Run the Project
 
 ## 1. Clone the Repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/aayushijain-ge/Student-Management-App.git
 ```
 
 ## 2. Navigate to the Project
 
 ```bash
-cd Student-Management-App
+cd Backend
 ```
 
 ## 3. Create a Virtual Environment
@@ -88,8 +78,6 @@ python3 -m venv venv
 ```
 
 ## 4. Activate the Virtual Environment
-
-### Ubuntu/Linux
 
 ```bash
 source venv/bin/activate
@@ -112,7 +100,7 @@ python -m uvicorn main:app --reload
 
 #  API Documentation
 
-After running the server, open: http://127.0.0.1:8000/
+To run the server, open: http://127.0.0.1:8000/
 
 For Swagger UI
 
