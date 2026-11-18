@@ -13,19 +13,6 @@ A backend project built using **FastAPI** to learn backend development through p
 
 ---
 
-#  Project Structure (Day 1)
-
-```text
-Student-Management-App/Backend/
-                        │
-                        ├── venv/
-                        ├── main.py
-                        ├── requirements.txt
-                        ├── README.md
-                        └── .gitignore
-```
-
----
 
 #  Day 1 - Backend Fundamentals & Web API Basics
 
@@ -93,7 +80,8 @@ pip install -r requirements.txt
 ## 6. Start the FastAPI Server
 
 ```bash
-python -m uvicorn main:app --reload
+
+python -m uvicorn app.main:app --reload
 ```
 
 ---
