@@ -1,7 +1,9 @@
-from fastapi import APIRouter, HTTPException, status
+from fastapi import APIRouter, HTTPException, status, Depends
 
 from app.schemas.student import StudentCreate, StudentUpdate, StudentResponse
 from app.services import student_service
+
+from app.dependencies import get_current_user
 
 router = APIRouter(prefix="/students", tags=["Students"])
 

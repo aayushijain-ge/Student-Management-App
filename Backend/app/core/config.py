@@ -1,3 +1,5 @@
+import os
+
 class Settings:
     APP_NAME = "Student Management API"
     APP_DESCRIPTION = "FastAPI CRUD for students"
@@ -7,5 +9,8 @@ class Settings:
         "http://127.0.0.1:5173",
     ]
 
+    SECRET_KEY = os.getenv("SECRET_KEY", "dev-only-secret-change-me")
+    ALGORITHM = "HS256"
+    ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
 settings = Settings()
