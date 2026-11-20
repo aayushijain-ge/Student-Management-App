@@ -6,6 +6,11 @@ from app.db.database import get_db
 from app.dependencies import get_current_user
 from app.schemas.user import Token, UserCreate, UserLogin, UserResponse
 from app.services import user_service
+import logging
+
+from app.tasks.email_tasks import send_welcome_email
+
+logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/auth", tags=["Auth"])
 
@@ -14,8 +19,17 @@ router = APIRouter(prefix="/auth", tags=["Auth"])
 def register(data: UserCreate, db: Session = Depends(get_db)):
     if user_service.get_by_username(db, data.username):
         raise HTTPException(status_code=409, detail="Username already taken")
-    return user_service.create_user(db, data)
+    if user_service.get_by_email(db, data.email):
+        raise HTTPException(status_code=409, detail="Email already registered")
 
+    user = user_service.create_user(db, data)
+
+    try:
+        send_welcome_email.delay(user.email, user.username)
+    except Exception:
+        logger.exception("Could not queue welcome email")
+
+    return user
 
 @router.post("/login", response_model=Token)
 def login(data: UserLogin, db: Session = Depends(get_db)):

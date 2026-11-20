@@ -96,5 +96,6 @@ For Swagger UI
 http://127.0.0.1:8000/docs
 ```
 ```
-
+To run : Celery worker
+celery -A app.core.celery_app.celery_app worker --loglevel=info
 ---

@@ -19,3 +19,10 @@ class StudentResponse(StudentBase):
     model_config = ConfigDict(from_attributes=True)
 
     id: int
+
+
+class StudentListResponse(BaseModel):
+    total: int
+    skip: int
+    limit: int
+    items: list[StudentResponse]

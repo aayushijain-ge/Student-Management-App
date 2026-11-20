@@ -10,9 +10,13 @@ def get_by_username(db: Session, username: str):
     return db.scalar(select(User).where(User.username == username))
 
 
+def get_by_email(db: Session, email: str):
+    return db.scalar(select(User).where(User.email == email))
+
 def create_user(db: Session, data: UserCreate):
     user = User(
         username=data.username,
+        email =data.email,
         hashed_password=hash_password(data.password),
     )
     db.add(user)
