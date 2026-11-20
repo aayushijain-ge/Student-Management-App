@@ -1,36 +1,41 @@
-from app.db.fake_db import students_db
+from sqlalchemy import select
+from sqlalchemy.orm import Session
+
+from app.models.student import Student
 from app.schemas.student import StudentCreate, StudentUpdate
 
 
-def get_all_students():
-    return students_db
+def get_all_students(db: Session):
+    return db.scalars(select(Student)).all()
 
 
-def get_student_by_id(student_id: int):
-    for student in students_db:
-        if student["id"] == student_id:
-            return student
-    return None
+def get_student_by_id(db: Session, student_id: int):
+    return db.get(Student, student_id)
 
 
-def create_student(data: StudentCreate):
-    new_id = max((s["id"] for s in students_db), default=0) + 1
-    student = {"id": new_id, **data.model_dump()}
-    students_db.append(student)
+def create_student(db: Session, data: StudentCreate):
+    student = Student(**data.model_dump())
+    db.add(student)
+    db.commit()
+    db.refresh(student)
     return student
 
 
-def update_student(student_id: int, data: StudentUpdate):
-    for index, student in enumerate(students_db):
-        if student["id"] == student_id:
-            students_db[index] = {"id": student_id, **data.model_dump()}
-            return students_db[index]
-    return None
+def update_student(db: Session, student_id: int, data: StudentUpdate):
+    student = db.get(Student, student_id)
+    if not student:
+        return None
+    for field, value in data.model_dump().items():
+        setattr(student, field, value)
+    db.commit()
+    db.refresh(student)
+    return student
 
 
-def delete_student(student_id: int) -> bool:
-    student = get_student_by_id(student_id)
-    if student:
-        students_db.remove(student)
-        return True
-    return False
+def delete_student(db: Session, student_id: int) -> bool:
+    student = db.get(Student, student_id)
+    if not student:
+        return False
+    db.delete(student)
+    db.commit()
+    return True

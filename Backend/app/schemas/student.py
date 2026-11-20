@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 
 
 class StudentBase(BaseModel):
@@ -8,11 +8,14 @@ class StudentBase(BaseModel):
 
 
 class StudentCreate(StudentBase):
-    pass           
+    pass
+
 
 class StudentUpdate(StudentBase):
-    pass       
+    pass
 
 
 class StudentResponse(StudentBase):
-    id: int         # what the API sends back
+    model_config = ConfigDict(from_attributes=True)
+
+    id: int
